@@ -117,20 +117,36 @@ namespace lab16_OOP
             Program.PrintCollection(Program.list, this);
         }
 
-        private void button6_Click(object sender, EventArgs e)
+        private void XmlSaveButton_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void binaryLoadButton_Click(object sender, EventArgs e)
-        {
-            Loader.Load(Program.list, new BinaryFormatter(), "bin files (*.bin)|*.bin");
-            Program.PrintCollection(Program.list, this);
+            Printer.XmlSave(Program.list, "xml files (*.xml)|*.xml");
         }
 
         private void binarySaveButton_Click(object sender, EventArgs e)
         {
-            Printer.Save(Program.list, new BinaryFormatter(), "bin files (*.bin)|*.bin");
+            Printer.BinarySave(Program.list, new BinaryFormatter(), "bin files (*.bin)|*.bin");
+        }
+
+        private void jsonSaveButton_Click(object sender, EventArgs e)
+        {
+            Printer.JsonSave(Program.list, "json files (*.json)|*.json");
+        }
+        private void binaryLoadButton_Click(object sender, EventArgs e)
+        {
+            Program.list = Loader.BinaryLoad(Program.list, new BinaryFormatter(), "bin files (*.bin)|*.bin");
+            Program.PrintCollection(Program.list, this);
+        }
+
+        private void jsonLoadButton_Click(object sender, EventArgs e)
+        {
+            Program.list = Loader.JsonLoad(Program.list, "json files (*.json)|*.json");
+            Program.PrintCollection(Program.list, this);
+        }
+
+        private void XmlLoadButton_Click(object sender, EventArgs e)
+        {
+            Program.list = Loader.XmlLoad(Program.list, "xml files (*.xml)|*.xml");
+            Program.PrintCollection(Program.list, this);
         }
     }
 }

@@ -263,8 +263,8 @@ namespace lab16_OOP
             }
             return copy;
         }
-        public delegate bool comparator(T e1, Engine e2);
-        public int FindIndex(comparator match, Engine e)
+        public delegate bool comparatoR(T e1, Engine e2);
+        public int FindIndex(comparatoR match, Engine e)
         {
             for (int i = 0; i < Count; i++)
             {

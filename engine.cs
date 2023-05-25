@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.Xml;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 
 
@@ -10,6 +13,11 @@ namespace lab16_OOP
 {
     //15)	двигатель, двигатель внутреннего сгорания, дизель, турбореактивный двигатель;
     [Serializable]
+    [JsonDerivedType(typeof(Engine), typeDiscriminator: "Engine")]
+    [JsonDerivedType(typeof(InternalCombustionEngine), typeDiscriminator: "InternalCombustionEngine")]
+    [JsonDerivedType(typeof(DiselEngine), typeDiscriminator: "DiselEngine")]
+    [JsonDerivedType(typeof(TurbojetEngine), typeDiscriminator: "TurbojetEngine")]
+    [XmlInclude(typeof(InternalCombustionEngine))]
     public class Engine : IRandomInit, IComparable, ICloneable<Engine>
     {
         protected int weight;
@@ -61,6 +69,8 @@ namespace lab16_OOP
     }
 
     [Serializable]
+    [XmlInclude(typeof(TurbojetEngine))]
+    [XmlInclude(typeof(DiselEngine))]
     public class InternalCombustionEngine : Engine
     {
         protected int cost;
@@ -106,7 +116,11 @@ namespace lab16_OOP
     {
         private static string[] FUELS = new string[] { "summer", "winter", "arctic" };
 
-        public string fuel; //тип топлива
+        public string fuel
+        {
+            get;
+            set;
+        } //тип топлива
         public DiselEngine(int _weight, string _fuel, int _cost = 40000) : base(_weight, _cost)
         {
             fuel = _fuel;
@@ -122,7 +136,7 @@ namespace lab16_OOP
         }
         public override string ToString()
         {
-            return $"{this.GetType().Name} \t\t\tweight: {Weight} kg\ttype of fuel: {fuel}";
+            return $"{this.GetType().Name} \t\t\tweight: {Weight} kg\tCost: {Cost} \ttype of fuel: {fuel}";
         }
         public override DiselEngine Clone()
         {
@@ -140,7 +154,12 @@ namespace lab16_OOP
     [Serializable]
     public class TurbojetEngine : InternalCombustionEngine
     {
-        protected int combustionChamberVolume; //объем камеры сгорания
+        public int combustionChamberVolume//объем камеры сгорания
+        {
+            get;
+            set;
+        }
+        
         public TurbojetEngine(int _weight, int _combustionChamberVolume, int _cost = 70000000) : base(_weight, _cost)
         {
             combustionChamberVolume = _combustionChamberVolume;
@@ -156,7 +175,7 @@ namespace lab16_OOP
         }
         public override string ToString()
         {
-            return $"{this.GetType().Name} \t\t\tweight: {Weight} kg\tCCV: {combustionChamberVolume}";
+            return $"{this.GetType().Name} \t\t\tweight: {Weight} kg\tCost: {Cost}\tCCV: {combustionChamberVolume}";
         }
         public override TurbojetEngine Clone()
         {

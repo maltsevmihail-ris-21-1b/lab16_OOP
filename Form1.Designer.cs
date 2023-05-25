@@ -32,6 +32,7 @@
             button1 = new Button();
             sorting = new CheckBox();
             groupBox1 = new GroupBox();
+            label2 = new Label();
             WeightFilter = new TextBox();
             radioButton4 = new RadioButton();
             radioButton3 = new RadioButton();
@@ -60,7 +61,7 @@
             mainTextBox.Name = "mainTextBox";
             mainTextBox.ReadOnly = true;
             mainTextBox.ScrollBars = ScrollBars.Both;
-            mainTextBox.Size = new Size(688, 517);
+            mainTextBox.Size = new Size(756, 517);
             mainTextBox.TabIndex = 0;
             mainTextBox.Text = "[\r\n\tEmpty\r\n]";
             // 
@@ -87,6 +88,7 @@
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(label2);
             groupBox1.Controls.Add(WeightFilter);
             groupBox1.Controls.Add(radioButton4);
             groupBox1.Controls.Add(radioButton3);
@@ -100,9 +102,18 @@
             groupBox1.Text = "Выборка";
             groupBox1.Enter += groupBox1_Enter;
             // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(17, 150);
+            label2.Name = "label2";
+            label2.Size = new Size(36, 20);
+            label2.TabIndex = 5;
+            label2.Text = "Вес:";
+            // 
             // WeightFilter
             // 
-            WeightFilter.Location = new Point(17, 147);
+            WeightFilter.Location = new Point(59, 147);
             WeightFilter.Name = "WeightFilter";
             WeightFilter.Size = new Size(125, 27);
             WeightFilter.TabIndex = 4;
@@ -218,6 +229,7 @@
             button9.TabIndex = 5;
             button9.Text = "Загрузить XML";
             button9.UseVisualStyleBackColor = true;
+            button9.Click += XmlLoadButton_Click;
             // 
             // button8
             // 
@@ -227,6 +239,7 @@
             button8.TabIndex = 4;
             button8.Text = "Загрузить JSON";
             button8.UseVisualStyleBackColor = true;
+            button8.Click += jsonLoadButton_Click;
             // 
             // button7
             // 
@@ -246,7 +259,7 @@
             button6.TabIndex = 2;
             button6.Text = "Сохранить XML";
             button6.UseVisualStyleBackColor = true;
-            button6.Click += button6_Click;
+            button6.Click += XmlSaveButton_Click;
             // 
             // button5
             // 
@@ -256,6 +269,7 @@
             button5.TabIndex = 1;
             button5.Text = "Сохранить JSON";
             button5.UseVisualStyleBackColor = true;
+            button5.Click += jsonSaveButton_Click;
             // 
             // button4
             // 
@@ -271,7 +285,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1024, 568);
+            ClientSize = new Size(1084, 568);
             Controls.Add(groupBox3);
             Controls.Add(label1);
             Controls.Add(groupBox2);
@@ -311,5 +325,6 @@
         private Button button6;
         private Button button5;
         private Button button4;
+        private Label label2;
     }
 }
